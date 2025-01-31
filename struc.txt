@@ -1,0 +1,65 @@
+#include <stdio.h>
+
+typedef enum {HumanResource, Sales,Research,Software,Executive
+} Department;
+
+typedef struct {Department dept; int annualSalary;unsigned int socialSecurityNumber;
+} Employee;
+t
+int generateSalary(Department dept) {
+    int BS;
+    int offset = rand() % 10000; // Random offset between 0 and 9999
+
+    switch (dept) {
+        case HumanResource:
+            BS = 50000;
+        case Sales:
+            BS = 60000; 
+        case Research:
+            BS = 70000;
+        case Software:
+            BS = 80000;
+        case Executive:
+            BS = 100000;
+    }
+    return BS + offset;
+}
+
+void printEmployee(const Employee* emp) {
+    const char* deptName;
+    switch (emp->dept) {
+        case HR:
+            deptName = "HR";
+            break;
+        case Sales:
+            deptName = "Sales";
+            break;
+        case Research:
+            deptName = "Research";
+            break;
+        case Software:
+            deptName = "Software";
+            break;
+        case Executive:
+            deptName = "Executive";
+            break;
+    }
+    printf("Department: %s, Salary: %d, SSN: %u\n", deptName, emp->annualSalary, emp->socialSecurityNumber);
+}
+
+int main() {
+    Employee Emp[10];
+
+    // for random number generation
+    srand(0);
+
+    // Generate 10 Emp 
+    for (unsigned int i = 0; i < 10; ++i) {
+        Emp[i].dept = (Department)(rand() % 5); // Random department
+        Emp[i].annualSalary = generateSalary(Emp[i].dept);
+        Emp[i].socialSecurityNumber = 100000000 + i + 1; // Unique SSN
+    }
+
+
+    return 0;
+}
